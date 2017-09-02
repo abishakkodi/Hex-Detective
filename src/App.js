@@ -5,31 +5,22 @@ import RandomColor from './components/RandomColor.js';
 import Guess from './components/Guess.js';
 import GuessWindow from './components/GuessWindow.js';
 
-
-
 class App extends Component {
-
 
   constructor (props) {
     super(props);
-
-
     this.state = {
       currentColor: '',
       guess: '',
       message: 'Click Guess to find out!',
-      showCheat: false
+      showCheat: false,
+      madeGuess: false
     }
-
-
-
   }
 
   componentDidMount = () => {
-
     this.newColor();
   }
-
 
   newColor = () => {
     var possibleValues = [ '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
@@ -42,24 +33,25 @@ class App extends Component {
     this.setState({currentColor:randomColor.join(''),
                           guess: 'Make a Guess!',
                         message: 'Click Guess to find out!',
-                        showCheat: false
+                        showCheat: false,
+                        madeGuess: false
                   });
   }
 
   cheat = () => {
-    var toggle = !this.state.cheat
+    console.log(this.state.cheat);
+    var toggle = !this.state.showCheat
     this.setState({showCheat:toggle});
   }
 
   newGuess = (userGuess) => {
-    console.log('in changeGuess');
-    console.log(userGuess);
-    this.setState({guess: userGuess});
+    this.setState({guess: userGuess,
+               madeGuess: true});
     this.checkGuess();
   }
 
   checkGuess = () => {
-    var failResponses = ['Nope', 'Sucks To Suck', 'Try Again'];
+    var failResponses = ['Nope', 'Sucks To Suck', 'Try Again', 'A oneder can do better than this'];
 
     if(this.state.guess === this.state.currentColor) {
       this.setState({message: 'JK, Congrats you won!'});
@@ -82,13 +74,9 @@ class App extends Component {
       <div className="Title">
         <h1> Hex Detective </h1>
       </div>
-
         <ColorWindow hexColor={this.state.currentColor}   />
-
         <div style={styles}>
-          <h2>Hex Detective</h2>
-
-          {this.state.showCheat? <h2>Current Color: {this.state.currentColor}</h2> : null}
+          {this.state.showCheat? <h2> Current Color: {this.state.currentColor}</h2> : null}
           <h2>Current Guess: {this.state.guess}</h2>
           <h2>Did you win?: {this.state.message}</h2>
           </div>
@@ -98,7 +86,7 @@ class App extends Component {
 
         <div>
           <Guess onGuess={this.newGuess.bind(this) } onCheat={this.cheat.bind(this)} />
-          <GuessWindow guessColor={this.state.guess} />
+          {this.state.madeGuess? <GuessWindow guessColor={this.state.guess} /> : null }
         </div>
 
       </div>

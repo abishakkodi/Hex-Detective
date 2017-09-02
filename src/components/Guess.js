@@ -1,4 +1,5 @@
 const React = require('react');
+const _ = require('underscore');
 
 class Guess extends React.Component{
   constructor(props) {
@@ -9,11 +10,22 @@ class Guess extends React.Component{
     }
   }
 
-  handleGuessChange = (e) => {
-    e.preventDefault();
-    this.setState({guess: e.target.value});
-  }
 
+  validGuess = (string) => {
+    var possibleValues = [ '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+
+    if (string.length !== 6) {
+      return false;
+    }
+
+    var letters = string.split('');
+
+    var valid = _.every(letters, (letter) => {
+      return possibleValues.includes(letter);
+    });
+
+    return valid;
+  }
 
   render = () => {
     const styles = {
@@ -31,10 +43,9 @@ class Guess extends React.Component{
         <form onSubmit={this.handleCheat}>
           <input type="submit" value="Show Answer" />
         </form>
-      </div>
-
-      )
+      </div>);
   }
+
   handleCheat = (e) => {
     e.preventDefault();
     this.props.onCheat()
@@ -42,8 +53,19 @@ class Guess extends React.Component{
 
   handleGuess = (e) => {
     e.preventDefault();
-    this.props.onGuess(this.state.guess);
+
+    if (this.validGuess(this.state.guess)) {
+        console.log('Validated Correctly');
+        this.props.onGuess(this.state.guess);
+    } else {
+        this.props.onGuess('Not a Valid Guess');
+    }
     //this.setState({ value: e.target.value});
+  }
+
+  handleGuessChange = (e) => {
+    e.preventDefault();
+    this.setState({guess: e.target.value});
   }
 
 };
