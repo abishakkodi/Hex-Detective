@@ -2,33 +2,12 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .hexagon {
-  position: relative;
-  width: 500px;
-  height: 288.68px;
+  position: absolute;
+  width: 300px;
+  height: 173.21px;
   background-color: #64C7CC;
-  margin: 144.34px 0;
+  margin: 86.60px 0;
   border-left: solid 5px #333333;
   border-right: solid 5px #333333;
 }
@@ -38,23 +17,35 @@
   content: "";
   position: absolute;
   z-index: 1;
-  width: 353.55px;
-  height: 353.55px;
+  width: 212.13px;
+  height: 212.13px;
   -webkit-transform: scaleY(0.5774) rotate(-45deg);
   -ms-transform: scaleY(0.5774) rotate(-45deg);
   transform: scaleY(0.5774) rotate(-45deg);
   background-color: inherit;
-  left: 68.2233px;
+  left: 38.9340px;
 }
 
 .hexagon:before {
-  top: -176.7767px;
+  top: -106.0660px;
   border-top: solid 7.0711px #333333;
   border-right: solid 7.0711px #333333;
 }
 
 .hexagon:after {
-  bottom: -176.7767px;
+  bottom: -106.0660px;
   border-bottom: solid 7.0711px #333333;
   border-left: solid 7.0711px #333333;
+}
+
+.guessWindow {
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  float: right;
+}
+
+input, button {
+  margin: 5px;
+  padding: 5px;
 }

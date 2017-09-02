@@ -1,11 +1,8 @@
 const React = require('react');
 
 class ColorWindow extends React.Component{
-  constructor(props){
-    super(props);
-  }
 
-  render() {
+  render = () => {
     var color = '#' + this.props.hexColor;
     const divStyle = {
         background: color,
@@ -18,7 +15,7 @@ class ColorWindow extends React.Component{
 
       </div>
 
-      )
+      );
   }
 };
 
